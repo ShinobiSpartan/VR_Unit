@@ -5,81 +5,21 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
-    public static UnityAction<bool> onHasController = null;
-
-    public static UnityAction onTriggerUp = null;
-    public static UnityAction onTriggerDown = null;
-    public static UnityAction onTouchPadUp = null;
-    public static UnityAction onTouchPadDown = null;
-
-    private bool hasController = false;
-    private bool inputActive = true;
-
-    private void Awake()
-    {
-        OVRManager.HMDMounted += PlayerFound;
-        OVRManager.HMDMounted += PlayerLost;
-    }
-
-    private void OnDestroy()
-    {
-        OVRManager.HMDMounted -= PlayerFound;
-        OVRManager.HMDMounted -= PlayerLost;
-    }
-
     void Update()
     {
-        if (!inputActive)
-            return;
 
-        hasController = CheckForController(hasController);
+        Vector2 touchValue = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
 
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger))
+        if(OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad))
         {
-            if (onTriggerUp != null)
-                onTriggerUp();
+            if (touchValue.y > 0.5 && touchValue.x > -0.25 && touchValue.x < 0.25)
+                transform.position += transform.forward;
+            else if (touchValue.y < 0.5 && touchValue.x > -0.25 && touchValue.x < 0.25)
+                transform.position -= transform.forward;
+            else if (touchValue.x > 0.5 && touchValue.y > -0.25 && touchValue.y < 0.25)
+                transform.Rotate(new Vector3(0, 90, 0));
+            else if (touchValue.x < 0.5 && touchValue.y > -0.25 && touchValue.y < 0.25)
+                transform.Rotate(new Vector3(0, -90, 0));
         }
-        if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-        {
-            if (onTriggerDown != null)
-                onTriggerDown();
-        }
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad))
-        {
-            if (onTouchPadDown != null)
-                onTouchPadDown();
-        }
-        if (OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad))
-        {
-            if (onTouchPadUp != null)
-                onTouchPadUp();
-        }
-
-        float triggerVlaue = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
-    }
-
-    private bool CheckForController(bool currentValue)
-    {
-        bool controllerCheck = OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) ||
-                               OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote);
-
-        if (currentValue == controllerCheck)
-            return currentValue;
-
-        if(onHasController != null)
-            onHasController(controllerCheck);
-        
-
-        return controllerCheck;
-    }
-
-    private void PlayerFound()
-    {
-        inputActive = true;
-    }
-
-    private void PlayerLost()
-    {
-        inputActive = false;
     }
 }
