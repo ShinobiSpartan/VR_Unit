@@ -5,13 +5,16 @@ using UnityEngine;
 public class SeekerMovement : MonoBehaviour
 {
     NodeGrid nodeGrid;
+    Pathfinding pF;
 
-    public GameObject seeker;
+    private MazeCell currentCell;
 
     public float timeBetweenMoves = 0.15f;
     private float moveTimer;
 
     public float distanceOfMoves = 0.05f;
+
+    public float speedTrigger = 5f;
 
     private void Awake()
     {
@@ -30,11 +33,21 @@ public class SeekerMovement : MonoBehaviour
             moveTimer += Time.deltaTime;
             if(moveTimer >= timeBetweenMoves)
             {
-                if(seeker.transform.position != nodeGrid.path[0].worldPosition)
-                    seeker.transform.position = Vector3.MoveTowards(seeker.transform.position, nodeGrid.path[0].worldPosition, distanceOfMoves);
+                if(pF.seeker.transform.position != nodeGrid.path[0].worldPosition)
+                    pF.seeker.transform.position = Vector3.MoveTowards(pF.seeker.transform.position, nodeGrid.path[0].worldPosition, distanceOfMoves);
+
+                float distToTarget = Vector3.Distance(pF.seeker.transform.position, pF.target.transform.position);
+                if (distToTarget < speedTrigger)
+                    timeBetweenMoves = timeBetweenMoves * 0.5f;
 
                 moveTimer -= timeBetweenMoves;
             }
         }
+    }
+
+    public void SetLocation(MazeCell cell)
+    {
+        currentCell = cell;
+        pF.seeker.transform.localPosition = cell.transform.localPosition;
     }
 }
