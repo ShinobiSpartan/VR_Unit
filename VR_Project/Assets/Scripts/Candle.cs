@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class Candle : MonoBehaviour
 {
-    public Light candle;
+    public Player player;
+    public MazeExit exit;
+    public ParticleSystem flame;
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.L))
-        { 
-            if (candle.enabled)
-            {
-                candle.enabled = false;
-            }
-            else
-            {
-                candle.enabled = true;
-            }
-        }
+        flame = GetComponent<ParticleSystem>();
+        var vel = flame.velocityOverLifetime;
+        vel.y = Vector3.Distance(player.transform.position, exit.transform.position);
     }
 }
