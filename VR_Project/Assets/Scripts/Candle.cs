@@ -9,8 +9,8 @@ public class Candle : MonoBehaviour
     public ParticleSystem flame;
     private void Update()
     {
-        flame = GetComponent<ParticleSystem>();
-        var vel = flame.velocityOverLifetime;
-        vel.y = Vector3.Distance(player.transform.position, exit.transform.position);
+        //flame = GetComponent<ParticleSystem>();
+        //var vel = flame.velocityOverLifetime;
+        //vel.y = Vector3.Distance(player.transform.position, exit.transform.position);
     }
 }
