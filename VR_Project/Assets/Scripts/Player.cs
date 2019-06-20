@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public SeekerMovement seeker;
     public bool lightIsOn;
     private MazeCell currentCell;
     public Maze maze;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
-            SeekerMovement.SetLocation(maze.RandomCoordinates);
+            seeker.SetLocation(maze.GetCell(maze.RandomCoordinates));
         }
         SetHealth();
     }
