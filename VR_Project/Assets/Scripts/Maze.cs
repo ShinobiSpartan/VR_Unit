@@ -38,8 +38,8 @@ public class Maze : MonoBehaviour
     public IEnumerator DeBugGenerate()
     {
         
-        size.x = 15;
-        size.z = 15;
+        size.x = 10;
+        size.z = 10;
         
         isGenerating = true;
         ExitCreated = false;
@@ -65,8 +65,8 @@ public class Maze : MonoBehaviour
     //If not in debug mode
     public void Generate()
     {
-        size.x = 15;
-        size.z = 15;
+        size.x = 10;
+        size.z = 10; ;
         
         isGenerating = true;
         ExitCreated = false;
@@ -195,7 +195,7 @@ public class Maze : MonoBehaviour
         newCell.coordinates = coordinates;
         newCell.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
         newCell.transform.parent = transform;
-        newCell.transform.localPosition = new Vector3((coordinates.x - size.x) * (1f + 1f), 0f, (coordinates.z - size.z) * (1f + 1f));
+        newCell.transform.localPosition = new Vector3((coordinates.x - size.x) * (1f +1f), 0f, (coordinates.z - size.z) * (1f + 1f));
         
         return newCell;
     }

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public bool lightIsOn;
     private MazeCell currentCell;
+    public Maze maze;
     public int baseHealth = 3;
     public int currentHealth;
     public void Start()
@@ -18,7 +19,16 @@ public class Player : MonoBehaviour
         currentCell = cell;
         transform.localPosition = cell.transform.localPosition;
     }
-   public void SetHealth()
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Monster")
+        {
+            SeekerMovement.SetLocation(maze.RandomCoordinates);
+        }
+        SetHealth();
+    }
+    public void SetHealth()
     {
         currentHealth = currentHealth - 1;
         if(currentHealth == 0)
