@@ -38,8 +38,8 @@ public class Maze : MonoBehaviour
     public IEnumerator DeBugGenerate()
     {
         
-        size.x = Random.Range(15, 30);
-        size.z = Random.Range(15, 30);
+        size.x = 15;
+        size.z = 15;
         
         isGenerating = true;
         ExitCreated = false;
@@ -65,8 +65,8 @@ public class Maze : MonoBehaviour
     //If not in debug mode
     public void Generate()
     {
-        size.x = Random.Range(15, 30);
-        size.z = Random.Range(15, 30);
+        size.x = 15;
+        size.z = 15;
         
         isGenerating = true;
         ExitCreated = false;

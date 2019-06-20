@@ -22,6 +22,11 @@ public class NodeGrid : MonoBehaviour
         CreateGrid();
     }
 
+    private void Update()
+    {
+        CreateGrid();
+    }
+
     public int MaxSize { get { return gridSizeX * gridSizeY; } }
 
     void CreateGrid()
