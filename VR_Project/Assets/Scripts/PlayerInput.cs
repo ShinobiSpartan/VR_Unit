@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
-
+    public Light candle;
     void Update()
     {
         Vector2 touchValue = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
@@ -21,6 +21,17 @@ public class PlayerInput : MonoBehaviour
                 transform.Rotate(new Vector3(0, 90, 0));
             else if (touchValue.x < 0.5 && touchValue.y > -0.25 && touchValue.y < 0.25)
                 transform.Rotate(new Vector3(0, -90, 0));
+        }
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        { 
+            if (candle.enabled)
+            {
+                candle.enabled = false;
+            }
+            else
+            {
+                candle.enabled = true;
+            }
         }
     }
 }
