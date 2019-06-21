@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5245dfa00a1b26d4c80496689e4842ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 0}
+  seeker: {fileID: 1848872669157631120, guid: 7ca7eb2b1fd2f6240a2be80bba7b9ca9, type: 3}
   target: {fileID: 0}
 --- !u!114 &4749845363854369050
 MonoBehaviour:
@@ -76,6 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157bf9f1bd30f5d42897c0580a4089ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 0}
   timeBetweenMoves: 0.15
   distanceOfMoves: 0.05
+  speedTrigger: 5

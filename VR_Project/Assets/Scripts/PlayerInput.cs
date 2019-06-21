@@ -7,6 +7,8 @@ public class PlayerInput : MonoBehaviour
 {
     public Player player;
     public Light candle;
+    public AudioSource igniting;
+    public AudioSource blowingOut;
     void Update()
     {
         Vector2 touchValue = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
@@ -29,11 +31,13 @@ public class PlayerInput : MonoBehaviour
             {
                 candle.enabled = false;
                 player.lightIsOn = false;
+                blowingOut.Play();
             }
             else
             {
                 candle.enabled = true;
                 player.lightIsOn = true;
+                igniting.Play();
             }
         }
     }

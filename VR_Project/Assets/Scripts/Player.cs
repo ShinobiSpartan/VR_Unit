@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
         currentHealth = baseHealth;
     }
 
+    
     public void SetLocation (MazeCell cell)
     {
         currentCell = cell;
@@ -26,8 +27,12 @@ public class Player : MonoBehaviour
         if (other.tag == "Monster")
         {
             seeker.SetLocation(maze.GetCell(maze.RandomCoordinates));
+            SetHealth();
         }
-        SetHealth();
+        if (other.tag == "Exit")
+        {
+            //bring up gui
+        }
     }
     public void SetHealth()
     {

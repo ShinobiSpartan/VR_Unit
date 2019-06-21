@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    public Pathfinding enemy;
     public Maze mazePrefab;
     public Player playerPrefab;
     private Player playerInstance;
@@ -77,6 +78,8 @@ public class GameManager : MonoBehaviour
             }
             playerInstance = Instantiate(playerPrefab) as Player;
             playerInstance.SetLocation(mazeInstance.GetCell(SpawnCoordinates));
+            enemy = Instantiate(enemy) as Pathfinding;
+            
         }
     }
     private void RestartGame()
